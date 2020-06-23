@@ -3,18 +3,20 @@ $_POST['0'] = '';
 /**
  * Class PaginationPDO for PDO
  */
+$mysqli = new mysqli('127.0.0.1', 'root', 'root', 'easy-pagi');
 class PaginationPDO{
 
     public static $table = 'images'; // Name of table
     public static  $pageLimit = 5;       //Max elements om page
 
-    public static function getElements(PDO $pdo, $fields, $offset) : array
+    public static function getElements(PDO $pdo, $fields, $offset)
     {
         return $pdo->query("SELECT ".implode(',', $fields)." FROM ".self::$table." ORDER BY `id` ASC LIMIT ".self::$pageLimit." OFFSET ". ($offset * self::$pageLimit))->fetchAll();
     }
-    public static function countRows(PDO $pdo) : int
+    public static function countRows(PDO $pdo)
     {
-        return $pdo->query("SELECT `id` FROM ".self::$table." ORDER BY `id` DESC LIMIT 1")->fetch()['id'] / self::$pageLimit;
+        $amount =  $pdo->query("SELECT `id` FROM ".self::$table." ORDER BY `id` DESC LIMIT 1")->fetch();
+        return $amount / self::$pageLimit;
     }
 }
 /**
@@ -25,14 +27,16 @@ class PaginationMysqli{
     public static $table = 'images'; // Name of table
     public static $pageLimit = 5;       //Max elements om page
 
-    public static function getElements(mysqli $mysqli, $fields, $offset) : array {
+    public static function getElements(mysqli $mysqli, $fields, $offset){
         return $mysqli->query("SELECT ".implode(',', $fields)." FROM ".self::$table." ORDER BY `id` ASC LIMIT ".self::$pageLimit." OFFSET ". ($offset * self::$pageLimit))->fetch_all();
     }
-    public static function countRows(mysqli $mysqli) : int
+    public static function countRows(mysqli $mysqli)
     {
-        return $mysqli->query("SELECT `id` FROM ".self::$table." ORDER BY `id` DESC LIMIT 1")->fetch_assoc()['id'] / self::$pageLimit;
+        $amount = $mysqli->query("SELECT `id` FROM ".self::$table." ORDER BY `id` DESC LIMIT 1")->fetch_assoc();
+        return $amount['id'] / self::$pageLimit;
     }
 }
+$amount = PaginationMysqli::countRows($mysqli);
 /**
  * $amount = PaginationPDO::countRows($pdo);
  *                     OR
@@ -53,6 +57,7 @@ class PaginationMysqli{
 </style>
 <body>
 <?php
+$elements = PaginationMysqli::getElements($mysqli, array('id', 'src'), array_key_first($_POST));
 /**
  * $elements = PaginationPDO::getElements($pdo, ['id', 'src'], array_key_first($_POST));  // id and src - fields to execute
  *                                              OR
