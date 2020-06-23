@@ -1,5 +1,5 @@
 <?php
-
+$_POST['0'] = '';
 /**
  * Class PaginationPDO for PDO
  */
@@ -64,7 +64,7 @@ class PaginationMysqli{
     echo '</pre>';
 
 ?>
-<form action="/" method="post">
+<form action="http://easy-pagi/php7.4+/" method="post">
     <button type="submit" name="0">Start</button>
 <?php
        for($i=0;$i<$amount;$i++){
