@@ -17,7 +17,6 @@ class PaginationPDO{
         return $pdo->query("SELECT `id` FROM ".self::$table." ORDER BY `id` DESC LIMIT 1")->fetch()['id'] / self::$pageLimit;
     }
 }
-$mysqli = new mysqli('127.0.0.1', 'root', 'root', 'easy-pagi');
 /**
  * Class PaginationMysqli for mysqli
  */
@@ -39,28 +38,28 @@ class PaginationMysqli{
  *                     OR
  * $amount = PaginationMysqli::countRows($mysqli);
  **/
-$amount = PaginationMysqli::countRows($mysqli);
 ?>
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Easy-pagi v01</title>
+    <title>Easy-pagination v0.1</title>
 </head>
-<style>form{
+<style>
+    form{
         display: flex;
         justify-content: center;
-    }</style>
+    }
+</style>
 <body>
 <?php
-$elements = PaginationMysqli::getElements($mysqli, ['id', 'src'],  preg_grep('([0-9]+)', array_keys($_POST))[0]);
 /**
  * $elements = PaginationPDO::getElements($pdo, ['id', 'src'], array_key_first($_POST));  // id and src - fields to execute
  *                                              OR
  * $elements = PaginationMysqli::getElements($mysqli, ['id', 'src'], array_key_first($_POST));
  **/
 echo '<pre>';
-print_r($elements);
+//print_r($elements);
 echo '</pre>';
 
 ?>

@@ -45,9 +45,10 @@ class PaginationMysqli{
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Easy-pagi v01</title>
+    <title>Easy-pagination v0.1</title>
 </head>
-<style>form{
+<style>
+    form{
         display: flex;
         justify-content: center;
     }</style>
