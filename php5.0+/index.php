@@ -3,7 +3,6 @@ $_POST['0'] = '';
 /**
  * Class PaginationPDO for PDO
  */
-$mysqli = new mysqli('127.0.0.1', 'root', 'root', 'easy-pagi');
 class PaginationPDO{
 
     public static $table = 'images'; // Name of table
@@ -36,7 +35,6 @@ class PaginationMysqli{
         return $amount['id'] / self::$pageLimit;
     }
 }
-$amount = PaginationMysqli::countRows($mysqli);
 /**
  * $amount = PaginationPDO::countRows($pdo);
  *                     OR
@@ -57,7 +55,6 @@ $amount = PaginationMysqli::countRows($mysqli);
 </style>
 <body>
 <?php
-$elements = PaginationMysqli::getElements($mysqli, array('id', 'src'), array_key_first($_POST));
 /**
  * $elements = PaginationPDO::getElements($pdo, ['id', 'src'], array_key_first($_POST));  // id and src - fields to execute
  *                                              OR
