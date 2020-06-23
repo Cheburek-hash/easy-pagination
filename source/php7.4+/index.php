@@ -56,7 +56,7 @@ class PaginationMysqli{
 <?php
 
     /**
-     * $elements = PaginationPDO::getElements($mysqli, ['id', 'src'], array_key_first($_POST));  // id and src - fields to execute
+     * $elements = PaginationPDO::getElements($pdo, ['id', 'src'], array_key_first($_POST));  // id and src - fields to execute
      *                                              OR
      * $elements = PaginationMysqli::getElements($mysqli, ['id', 'src'], array_key_first($_POST));
      **/
